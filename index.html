@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>&lt;x-marked&gt;</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: menlo, monospace;
+        font-size: 16px;
+      }
+      code {
+        font-family: menlo, monospace;
+      }
+      .container {
+        margin: 0 auto;
+        padding: 16px;
+        max-width: 960px;
+      }
+    </style>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script defer src="https://buttons.github.io/buttons.js"></script>
+    <script defer src="https://unpkg.com/github-corner@2.0.2"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+    <script type="module">
+      import XMarked from 'https://cdn.jsdelivr.net/npm/x-marked/dist/index.js';
+      customElements.define('x-marked', XMarked);
+
+      window.addEventListener('load', () => {
+        const xmarked = document.querySelector('x-marked');
+        xmarked.shadowRoot.querySelectorAll('pre code').forEach(block => {
+          hljs.highlightBlock(block);
+        });
+
+        const css = new CSSStyleSheet();
+        css.replaceSync(`body, code { font-family: menlo, monospace; }`);
+        xmarked.shadowRoot.adoptedStyleSheets = [css];
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/github.min.css';
+        xmarked.shadowRoot.appendChild(link);
+
+        const div = document.querySelector('div');
+        const h2 = xmarked.shadowRoot.querySelector('h2');
+        xmarked.shadowRoot.querySelector('div').insertBefore(div, h2);
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/1000ch/x-marked" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 1000ch/x-marked on GitHub">Star</a>
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/1000ch" data-size="large" data-show-count="true" aria-label="Follow @1000ch on GitHub">Follow @1000ch</a>
+    </div>
+    <github-corner>
+      <a href="https://github.com/1000ch/x-marked">GitHub</a>
+    </github-corner>
+    <x-marked class="container">
+# `<x-marked>`
+
+> Web Components which renders markdown using [marked](https://github.com/markedjs/marked).
+
+## Install
+
+Using [npm](https://www.npmjs.org/package/x-marked):
+
+```sh
+$ npm install x-marked
+```
+
+## Usage
+
+Import `XMarked` and register it as a custom element.
+
+```html
+<script type="module">
+import XMarked from 'https://cdn.jsdelivr.net/npm/x-marked/dist/index.js';
+customElements.define('x-marked', XMarked);
+</script>
+```
+
+Put `<x-marked>`.
+
+```html
+<x-marked>
+# x-marked
+
+Web Components which renders markdown using [marked](https://github.com/markedjs/marked).
+</x-marked>
+```
+
+## License
+
+[MIT](https://1000ch.mit-license.org) © [Shogo Sensui](https://github.com/1000ch)
+    </x-marked>
+  </body>
+</html>
