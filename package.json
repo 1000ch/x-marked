@@ -1,6 +1,6 @@
 {
   "name": "x-marked",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Web Components which renders markdown using marked.",
   "homepage": "https://github.com/1000ch/x-marked",
   "bugs": {
