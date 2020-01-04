@@ -20,7 +20,7 @@ Import `XMarked` and register it as a custom element.
 
 ```html
 <script type="module">
-import XMarked from 'https://cdn.jsdelivr.net/npm/x-marked/dist/index.js';
+import XMarked from 'https://unpkg.com/x-marked/dist/index.js';
 customElements.define('x-marked', XMarked);
 </script>
 ```
