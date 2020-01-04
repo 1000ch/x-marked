@@ -24,8 +24,8 @@
     </style>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script defer src="https://buttons.github.io/buttons.js"></script>
-    <script defer src="https://unpkg.com/github-corner@2.0.2"></script>
-    <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+    <script defer src="https://unpkg.com/github-corner/index.js"></script>
+    <script defer src="https://unpkg.com/prismjs/prism.js" data-manual></script>
     <script type="module">
       import XMarked from 'https://unpkg.com/x-marked/dist/index.js';
       customElements.define('x-marked', XMarked);
@@ -33,7 +33,7 @@
       window.addEventListener('load', () => {
         const xmarked = document.querySelector('x-marked');
         xmarked.shadowRoot.querySelectorAll('pre code').forEach(block => {
-          hljs.highlightBlock(block);
+          Prism.highlightElement(block);
         });
 
         const css = new CSSStyleSheet();
@@ -42,7 +42,7 @@
 
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/github.min.css';
+        link.href = 'https://unpkg.com/prism-themes/themes/prism-duotone-light.css';
         xmarked.shadowRoot.appendChild(link);
 
         const div = document.querySelector('div');
