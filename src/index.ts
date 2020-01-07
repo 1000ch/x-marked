@@ -1,6 +1,14 @@
 import marked from 'marked';
 import he from 'he';
 
+declare global {
+  interface Window {
+    Prism?: {
+      highlightElement(element: Element): void;
+    }
+  }
+}
+
 const templateHTML = `
   <style>
     * { font-family: inherit; }
@@ -259,6 +267,24 @@ export default class XMarked extends HTMLElement {
   }
 
   /**
+   * Get highlight property of the object.
+   */
+  get highlight(): boolean {
+    return this.hasAttribute('highlight');
+  }
+
+  /**
+   * Set highlight property of the object.
+   */
+  set highlight(value: boolean) {
+    if (value == null) {
+      this.removeAttribute('highlight');
+    } else {
+      this.setAttribute('highlight', '');
+    }
+  }
+
+  /**
    * Get marked options.
    */
   get markedOptions(): marked.MarkedOptions {
@@ -295,6 +321,36 @@ export default class XMarked extends HTMLElement {
     return he.decode(this.innerHTML, this.decodeOptions);
   }
 
+  /**
+   * Highlight code block.
+   */
+  highlightElements(): void {
+    if (this.shadowRoot?.querySelector('#prism-css') === null) {
+      const link = document.createElement('link');
+      link.id = 'prism-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/prism-themes/themes/prism-duotone-light.css';
+      this.shadowRoot?.appendChild(link);
+    }
+
+    const highlight = () => {
+      const elements = this.shadowRoot?.querySelectorAll('pre code');
+      elements?.forEach(element => window.Prism?.highlightElement(element));
+    }
+
+    if (window.Prism) {
+      highlight();
+    } else {
+      const script = document.createElement('script');
+      script.id = 'prism-js';
+      script.dataset.manual = '';
+      script.defer = true;
+      script.src = 'https://unpkg.com/prismjs';
+      script.onload = () => highlight();
+      this.shadowRoot?.appendChild(script);
+    }
+  }
+
   constructor() {
     super();
 
@@ -304,5 +360,9 @@ export default class XMarked extends HTMLElement {
 
     this.div = this.shadowRoot?.querySelector('div') as HTMLElement;
     this.div.innerHTML = marked(this.markdown, this.markedOptions);
+
+    if (this.highlight) {
+      this.highlightElements();
+    }
   }
 }
