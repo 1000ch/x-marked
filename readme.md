@@ -35,6 +35,12 @@ Web Components which renders markdown using [marked](https://github.com/markedjs
 </x-marked>
 ```
 
+## API
+
+### `highlight` attribute/property
+
+Boolean attribute/property to enable highlight.
+
 ## License
 
 [MIT](https://1000ch.mit-license.org) © [Shogo Sensui](https://github.com/1000ch)
