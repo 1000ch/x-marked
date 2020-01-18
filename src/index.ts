@@ -285,6 +285,28 @@ export default class XMarked extends HTMLElement {
   }
 
   /**
+   * Get highlightTheme property of the object.
+   */
+  get highlightTheme(): string | undefined {
+    if (this.hasAttribute('highlight-theme')) {
+      return this.getAttribute('highlight-theme') || 'prism-duotone-light';
+    }
+
+    return 'prism-duotone-light';
+  }
+
+  /**
+   * Set highlightTheme property of the object.
+   */
+  set highlightTheme(value: string | undefined) {
+    if (value == null) {
+      this.removeAttribute('highlight-theme');
+    } else {
+      this.setAttribute('highlight-theme', value);
+    }
+  }
+
+  /**
    * Get marked options.
    */
   get markedOptions(): marked.MarkedOptions {
@@ -329,7 +351,7 @@ export default class XMarked extends HTMLElement {
       const link = document.createElement('link');
       link.id = 'prism-css';
       link.rel = 'stylesheet';
-      link.href = 'https://unpkg.com/prism-themes/themes/prism-duotone-light.css';
+      link.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
       this.shadowRoot?.appendChild(link);
     }
 
