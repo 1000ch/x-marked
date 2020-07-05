@@ -34,7 +34,7 @@
     "@rollup/plugin-typescript": "^3.0.0",
     "@types/he": "^1.1.0",
     "@types/jest": "^25.1.2",
-    "@types/marked": "^0.7.2",
+    "@types/marked": "^1.1.0",
     "jest": "^26.0.0",
     "rollup": "^2.15.0",
     "terser": "^4.6.2",
