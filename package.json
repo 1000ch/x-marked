@@ -31,7 +31,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
-    "@rollup/plugin-typescript": "^3.0.0",
+    "@rollup/plugin-typescript": "^5.0.1",
     "@types/he": "^1.1.0",
     "@types/jest": "^26.0.3",
     "@types/marked": "^1.1.0",
