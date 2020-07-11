@@ -3,7 +3,6 @@
 > Web Components which renders markdown using [marked](https://github.com/markedjs/marked).
 
 [![Build Status](https://travis-ci.org/1000ch/x-marked.svg?branch=master)](https://travis-ci.org/1000ch/x-marked)
-[![NPM version](https://badge.fury.io/js/x-marked.svg)](http://badge.fury.io/js/x-marked)
 [![devDependency Status](https://david-dm.org/1000ch/x-marked/dev-status.svg)](https://david-dm.org/1000ch/x-marked?type=dev)
 
 ## Install
