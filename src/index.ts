@@ -20,6 +20,13 @@ const templateHTML = `
 export default class XMarked extends HTMLElement {
   div: HTMLElement;
 
+  static get observedAttributes(): string[] {
+    return [
+      'highlight',
+      'highlight-theme'
+    ];
+  }
+
   /**
    * Get baseUrl property of the object.
    */
@@ -347,12 +354,15 @@ export default class XMarked extends HTMLElement {
    * Highlight code block.
    */
   highlightElements(): void {
-    if (this.shadowRoot?.querySelector('#prism-css') === null) {
+    const prismCSS = this.shadowRoot?.querySelector('#prism-css') as HTMLLinkElement;
+    if (prismCSS === null) {
       const link = document.createElement('link');
       link.id = 'prism-css';
       link.rel = 'stylesheet';
       link.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
       this.shadowRoot?.appendChild(link);
+    } else {
+      prismCSS.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
     }
 
     const highlight = () => {
@@ -385,6 +395,14 @@ export default class XMarked extends HTMLElement {
 
     if (this.highlight) {
       this.highlightElements();
+    }
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === 'highlight' || name === 'highlight-theme') {
+      if (this.highlight) {
+        this.highlightElements();
+      }
     }
   }
 }
