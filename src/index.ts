@@ -1,14 +1,6 @@
 import marked from 'marked';
 import he from 'he';
 
-declare global {
-  interface Window {
-    Prism?: {
-      highlightElement(element: Element): void;
-    }
-  }
-}
-
 const templateHTML = `
   <style>
     * { font-family: inherit; }
