@@ -26,21 +26,21 @@
   },
   "dependencies": {
     "he": "^1.2.0",
-    "marked": "^1.1.0"
+    "marked": "^1.1.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-node-resolve": "^8.0.0",
-    "@rollup/plugin-typescript": "^5.0.1",
-    "@types/he": "^1.1.0",
-    "@types/jest": "^26.0.3",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@rollup/plugin-typescript": "^5.0.2",
+    "@types/he": "^1.1.1",
+    "@types/jest": "^26.0.4",
     "@types/marked": "^1.1.0",
-    "jest": "^26.0.0",
-    "rollup": "^2.15.0",
+    "jest": "^26.1.0",
+    "rollup": "^2.21.0",
     "terser": "^4.6.2",
-    "ts-jest": "^26.1.0",
+    "ts-jest": "^26.1.2",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "jest": {
     "moduleFileExtensions": [
