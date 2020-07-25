@@ -85,7 +85,7 @@ export default class XMarked extends HTMLElement {
   }
 
   /**
-   * Set gfm property of the object.
+   * Set headerIds property of the object.
    */
   set headerIds(value: boolean) {
     if (value == null) {
