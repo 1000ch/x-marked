@@ -17,6 +17,10 @@
         const div = document.querySelector('div');
         const h2 = xmarked.shadowRoot.querySelector('h2');
         xmarked.shadowRoot.querySelector('div').insertBefore(div, h2);
+
+        document.querySelector('select').addEventListener('change', e => {
+          xmarked.highlightTheme = e.target.value;
+        });
       });
     </script>
   </head>
@@ -30,6 +34,38 @@
     <github-corner>
       <a href="https://github.com/1000ch/x-marked">GitHub</a>
     </github-corner>
+
+    <div class="container">
+      <label>
+        &lt;x-marked highlight-theme="<select>
+          <option value="prism-a11y-dark">prism-a11y-dark</option>
+          <option value="prism-atom-dark">prism-atom-dark</option>
+          <option value="prism-base16-ateliersulphurpool.light">prism-base16-ateliersulphurpool.light</option>
+          <option value="prism-cb">prism-cb</option>
+          <option value="prism-darcula">prism-darcula</option>
+          <option value="prism-dracula">prism-dracula</option>
+          <option value="prism-duotone-dark">prism-duotone-dark</option>
+          <option value="prism-duotone-earth">prism-duotone-earth</option>
+          <option value="prism-duotone-forest">prism-duotone-forest</option>
+          <option value="prism-duotone-light">prism-duotone-light</option>
+          <option value="prism-duotone-sea">prism-duotone-sea</option>
+          <option value="prism-duotone-space">prism-duotone-space</option>
+          <option value="prism-ghcolors">prism-ghcolors</option>
+          <option value="prism-hopscotch">prism-hopscotch</option>
+          <option value="prism-material-dark">prism-material-dark</option>
+          <option value="prism-material-light">prism-material-light</option>
+          <option value="prism-material-oceanic">prism-material-oceanic</option>
+          <option value="prism-nord">prism-nord</option>
+          <option value="prism-pojoaque">prism-pojoaque</option>
+          <option value="prism-shades-of-purple">prism-shades-of-purple</option>
+          <option value="prism-synthwave84">prism-synthwave84</option>
+          <option value="prism-vs">prism-vs</option>
+          <option value="prism-vsc-dark-plus">prism-vsc-dark-plus</option>
+          <option value="prism-xonokai">prism-xonokai</option>
+        </select>"&gt;
+      </label>
+    </div>
+
     <x-marked highlight class="container">
 # `<x-marked>`
 
