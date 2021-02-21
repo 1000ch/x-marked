@@ -10,7 +10,7 @@ const templateHTML = `
 `;
 
 export default class XMarked extends HTMLElement {
-  div: HTMLElement;
+  div?: HTMLDivElement | null;
 
   static get observedAttributes(): string[] {
     return [
@@ -22,18 +22,14 @@ export default class XMarked extends HTMLElement {
   /**
    * Get baseUrl property of the object.
    */
-  get baseUrl(): string | undefined {
-    if (this.hasAttribute('baseUrl')) {
-      return this.getAttribute('baseUrl') || undefined;
-    }
-
-    return undefined;
+  get baseUrl(): string | null {
+    return this.getAttribute('baseUrl');
   }
 
   /**
    * Set baseUrl property of the object.
    */
-  set baseUrl(value: string | undefined) {
+  set baseUrl(value: string | null) {
     if (value == null) {
       this.removeAttribute('baseUrl');
     } else {
@@ -98,18 +94,14 @@ export default class XMarked extends HTMLElement {
   /**
    * Get headerPrefix property of the object.
    */
-  get headerPrefix(): string | undefined {
-    if (this.hasAttribute('headerPrefix')) {
-      return this.getAttribute('headerPrefix') || undefined;
-    }
-
-    return undefined;
+  get headerPrefix(): string | null {
+    return this.getAttribute('headerPrefix');
   }
 
   /**
    * Set headerPrefix property of the object.
    */
-  set headerPrefix(value: string | undefined) {
+  set headerPrefix(value: string | null) {
     if (value == null) {
       this.removeAttribute('headerPrefix');
     } else {
@@ -120,18 +112,14 @@ export default class XMarked extends HTMLElement {
   /**
    * Get langPrefix property of the object.
    */
-  get langPrefix(): string | undefined {
-    if (this.hasAttribute('langPrefix')) {
-      return this.getAttribute('langPrefix') || undefined;
-    }
-
-    return undefined;
+  get langPrefix(): string | null {
+    return this.getAttribute('langPrefix');
   }
 
   /**
    * Set langPrefix property of the object.
    */
-  set langPrefix(value: string | undefined) {
+  set langPrefix(value: string | null) {
     if (value == null) {
       this.removeAttribute('langPrefix');
     } else {
@@ -286,18 +274,14 @@ export default class XMarked extends HTMLElement {
   /**
    * Get highlightTheme property of the object.
    */
-  get highlightTheme(): string | undefined {
-    if (this.hasAttribute('highlight-theme')) {
-      return this.getAttribute('highlight-theme') || 'prism-duotone-light';
-    }
-
-    return 'prism-duotone-light';
+  get highlightTheme(): string | null {
+    return this.getAttribute('highlight-theme') || 'prism-duotone-light';
   }
 
   /**
    * Set highlightTheme property of the object.
    */
-  set highlightTheme(value: string | undefined) {
+  set highlightTheme(value: string | null) {
     if (value == null) {
       this.removeAttribute('highlight-theme');
     } else {
@@ -310,11 +294,11 @@ export default class XMarked extends HTMLElement {
    */
   get markedOptions(): marked.MarkedOptions {
     return {
-      baseUrl: this.baseUrl,
+      baseUrl: this.baseUrl || undefined,
       breaks: this.breaks,
       gfm: this.gfm,
       headerIds: this.headerIds,
-      headerPrefix: this.headerPrefix,
+      headerPrefix: this.headerPrefix || undefined,
       mangle: this.mangle,
       pedantic: this.pedantic,
       sanitize: this.sanitize,
@@ -346,15 +330,16 @@ export default class XMarked extends HTMLElement {
    * Highlight code block.
    */
   highlightElements(): void {
-    const prismCSS = this.shadowRoot?.querySelector('#prism-css') as HTMLLinkElement;
-    if (prismCSS === null) {
+    const prismCSS = this.shadowRoot?.querySelector<HTMLLinkElement>('#prism-css');
+
+    if (prismCSS) {
+      prismCSS.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
+    } else {
       const link = document.createElement('link');
       link.id = 'prism-css';
       link.rel = 'stylesheet';
       link.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
       this.shadowRoot?.appendChild(link);
-    } else {
-      prismCSS.href = `https://unpkg.com/prism-themes/themes/${this.highlightTheme}.css`;
     }
 
     const highlight = () => {
@@ -382,8 +367,11 @@ export default class XMarked extends HTMLElement {
       mode: 'open'
     }).innerHTML = templateHTML;
 
-    this.div = this.shadowRoot?.querySelector('div') as HTMLElement;
-    this.div.innerHTML = marked(this.markdown, this.markedOptions);
+    this.div = this.shadowRoot?.querySelector<HTMLDivElement>('div');
+
+    if (this.div) {
+      this.div.innerHTML = marked(this.markdown, this.markedOptions);
+    }
 
     if (this.highlight) {
       this.highlightElements();
