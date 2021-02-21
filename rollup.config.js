@@ -7,7 +7,8 @@ export default {
   input: 'src/index.ts',
   output: {
     dir: 'dist',
-    format: 'esm'
+    format: 'esm',
+    sourcemap: 'inline'
   },
   plugins: [
     typescript({
