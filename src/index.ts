@@ -10,7 +10,7 @@ const templateHTML = `
 `;
 
 export default class XMarked extends HTMLElement {
-  div?: HTMLDivElement | null;
+  private div?: HTMLDivElement | null;
 
   static get observedAttributes(): string[] {
     return [
@@ -384,5 +384,11 @@ export default class XMarked extends HTMLElement {
         this.highlightElements();
       }
     }
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'x-marked': XMarked;
   }
 }
