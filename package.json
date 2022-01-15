@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "he": "^1.2.0",
-    "marked": "^3.0.7"
+    "marked": "^4.0.10"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.0",
