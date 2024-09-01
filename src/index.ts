@@ -1,4 +1,4 @@
-import {marked} from 'marked';
+import {marked, type MarkedOptions} from 'marked';
 import he from 'he';
 
 const templateHTML = `
@@ -17,24 +17,6 @@ export default class XMarked extends HTMLElement {
       'highlight',
       'highlight-theme'
     ];
-  }
-
-  /**
-   * Get baseUrl property of the object.
-   */
-  get baseUrl(): string | null {
-    return this.getAttribute('baseUrl');
-  }
-
-  /**
-   * Set baseUrl property of the object.
-   */
-  set baseUrl(value: string | null) {
-    if (value == null) {
-      this.removeAttribute('baseUrl');
-    } else {
-      this.setAttribute('baseUrl', value);
-    }
   }
 
   /**
@@ -74,78 +56,6 @@ export default class XMarked extends HTMLElement {
   }
 
   /**
-   * Get headerIds property of the object.
-   */
-  get headerIds(): boolean {
-    return this.hasAttribute('headerIds');
-  }
-
-  /**
-   * Set headerIds property of the object.
-   */
-  set headerIds(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('headerIds');
-    } else {
-      this.setAttribute('headerIds', '');
-    }
-  }
-
-  /**
-   * Get headerPrefix property of the object.
-   */
-  get headerPrefix(): string | null {
-    return this.getAttribute('headerPrefix');
-  }
-
-  /**
-   * Set headerPrefix property of the object.
-   */
-  set headerPrefix(value: string | null) {
-    if (value == null) {
-      this.removeAttribute('headerPrefix');
-    } else {
-      this.setAttribute('headerPrefix', value);
-    }
-  }
-
-  /**
-   * Get langPrefix property of the object.
-   */
-  get langPrefix(): string | null {
-    return this.getAttribute('langPrefix');
-  }
-
-  /**
-   * Set langPrefix property of the object.
-   */
-  set langPrefix(value: string | null) {
-    if (value == null) {
-      this.removeAttribute('langPrefix');
-    } else {
-      this.setAttribute('langPrefix', value);
-    }
-  }
-
-  /**
-   * Get mangle property of the object.
-   */
-  get mangle(): boolean {
-    return this.hasAttribute('mangle');
-  }
-
-  /**
-   * Set mangle property of the object.
-   */
-  set mangle(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('mangle');
-    } else {
-      this.setAttribute('mangle', '');
-    }
-  }
-
-  /**
    * Get pedantic property of the object.
    */
   get pedantic(): boolean {
@@ -164,24 +74,6 @@ export default class XMarked extends HTMLElement {
   }
 
   /**
-   * Get sanitize property of the object.
-   */
-  get sanitize(): boolean {
-    return this.hasAttribute('sanitize');
-  }
-
-  /**
-   * Set sanitize property of the object.
-   */
-  set sanitize(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('sanitize');
-    } else {
-      this.setAttribute('sanitize', '');
-    }
-  }
-
-  /**
    * Get silent property of the object.
    */
   get silent(): boolean {
@@ -196,60 +88,6 @@ export default class XMarked extends HTMLElement {
       this.removeAttribute('silent');
     } else {
       this.setAttribute('silent', '');
-    }
-  }
-
-  /**
-   * Get smartLists property of the object.
-   */
-  get smartLists(): boolean {
-    return this.hasAttribute('smartLists');
-  }
-
-  /**
-   * Set smartLists property of the object.
-   */
-  set smartLists(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('smartLists');
-    } else {
-      this.setAttribute('smartLists', '');
-    }
-  }
-
-  /**
-   * Get smartypants property of the object.
-   */
-  get smartypants(): boolean {
-    return this.hasAttribute('smartypants');
-  }
-
-  /**
-   * Set smartypants property of the object.
-   */
-  set smartypants(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('smartypants');
-    } else {
-      this.setAttribute('smartypants', '');
-    }
-  }
-
-  /**
-   * Get xhtml property of the object.
-   */
-  get xhtml(): boolean {
-    return this.hasAttribute('xhtml');
-  }
-
-  /**
-   * Set xhtml property of the object.
-   */
-  set xhtml(value: boolean) {
-    if (value == null) {
-      this.removeAttribute('xhtml');
-    } else {
-      this.setAttribute('xhtml', '');
     }
   }
 
@@ -292,20 +130,13 @@ export default class XMarked extends HTMLElement {
   /**
    * Get marked options.
    */
-  get markedOptions(): marked.MarkedOptions {
+  get markedOptions(): MarkedOptions & {async: false} {
     return {
-      baseUrl: this.baseUrl || undefined,
+      async: false,
       breaks: this.breaks,
       gfm: this.gfm,
-      headerIds: this.headerIds,
-      headerPrefix: this.headerPrefix || undefined,
-      mangle: this.mangle,
       pedantic: this.pedantic,
-      sanitize: this.sanitize,
       silent: this.silent,
-      smartLists: this.smartLists,
-      smartypants: this.smartypants,
-      xhtml: this.xhtml
     };
   }
 
@@ -370,6 +201,7 @@ export default class XMarked extends HTMLElement {
     this.div = this.shadowRoot?.querySelector<HTMLDivElement>('div');
 
     if (this.div) {
+      this.markedOptions.async = false;
       this.div.innerHTML = marked(this.markdown, this.markedOptions);
     }
 

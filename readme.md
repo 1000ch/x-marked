@@ -1,4 +1,4 @@
-# x-marked ![GitHub Actions Status](https://github.com/1000ch/x-marked/workflows/test/badge.svg)
+# x-marked [![test](https://github.com/1000ch/x-marked/actions/workflows/test.yml/badge.svg)](https://github.com/1000ch/x-marked/actions/workflows/test.yml)
 
 > Web Components which renders markdown using [marked](https://github.com/markedjs/marked).
 
